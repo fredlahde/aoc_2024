@@ -29,17 +29,15 @@ pub fn run_solver_for_day(day: Day, run_mode: RunMode) -> anyhow::Result<()> {
         .get_mut(&day)
         .context("no solver registered for day")?;
 
-    let input = match run_mode {
-        RunMode::Sample => panic!("running against samples is not supported yet"),
-        RunMode::Input => {
-            let input_path = day.input_path();
-            let mut fd = File::open(input_path).context("failed to open file for puzzle input")?;
-            let mut input = String::new();
-            fd.read_to_string(&mut input)
-                .context("failed to read puzzle input")?;
-            input
-        }
+    let input_path = match run_mode {
+        RunMode::Sample => day.sample_path(),
+        RunMode::Input => day.input_path(),
     };
+
+    let mut fd = File::open(input_path).context("failed to open file for puzzle input")?;
+    let mut input = String::new();
+    fd.read_to_string(&mut input)
+        .context("failed to read puzzle input")?;
 
     solver.parse(&input);
     match solver.solve_p1() {
@@ -54,7 +52,6 @@ pub fn run_solver_for_day(day: Day, run_mode: RunMode) -> anyhow::Result<()> {
         }
     }
 
-    solver.parse(&input);
     match solver.solve_p2() {
         Ok(Solution::Solved(solution)) => {
             println!("Solution for day {day} part 2 is: {solution}")

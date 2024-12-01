@@ -7,6 +7,7 @@ use serde_derive::Deserialize;
 pub const STORAGE_DIR: &str = "storage/";
 pub const PROMPTS_DIR: &str = concat!(STORAGE_DIR, "prompts");
 pub const INPUTS_DIR: &str = concat!(STORAGE_DIR, "inputs");
+pub const SAMPLES_DIR: &str = concat!(STORAGE_DIR, "samples");
 
 #[derive(Deserialize)]
 pub struct Config {

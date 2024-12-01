@@ -16,7 +16,7 @@ use reqwest::{
 
 use anyhow::{bail, Context, Result};
 
-use crate::config::{Config, INPUTS_DIR, PROMPTS_DIR};
+use crate::config::{Config, INPUTS_DIR, PROMPTS_DIR, SAMPLES_DIR};
 
 const URL: &str = "adventofcode.com";
 const START_OF_PUZZLE_PROMPT: &str = "::: {role=\"main\"}";
@@ -46,6 +46,10 @@ impl Day {
 
     pub fn input_path(&self) -> PathBuf {
         PathBuf::from_str(&format!("{INPUTS_DIR}/{:02}.txt", self.0)).unwrap()
+    }
+
+    pub fn sample_path(&self) -> PathBuf {
+        PathBuf::from_str(&format!("{SAMPLES_DIR}/{:02}.txt", self.0)).unwrap()
     }
 }
 
