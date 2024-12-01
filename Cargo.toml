@@ -1,0 +1,12 @@
+[package]
+name = "aoc_2024"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.93"
+constcat = "0.5.1"
+reqwest = { version = "0.12.9", features = ["blocking", "cookies"] }
+serde = "1.0.215"
+serde_derive = "1.0.215"
+toml = "0.8.19"
