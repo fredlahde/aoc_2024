@@ -2,9 +2,9 @@
 use super::Solver;
 
 #[derive(Default)]
-pub struct Day01 {}
+pub struct Day07 {}
 
-impl Solver for Day01 {
+impl Solver for Day07 {
     #[allow(unused)]
     fn parse(&mut self, input: &str) {}
 
