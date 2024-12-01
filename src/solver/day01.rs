@@ -1,13 +1,17 @@
 use super::Solver;
 
-pub struct Day01;
+#[derive(Default)]
+pub struct Day01 {}
 
 impl Solver for Day01 {
-    fn solve_p1(&self, intput: &str) -> anyhow::Result<super::Solution> {
+    #[allow(unused)]
+    fn parse(&mut self, input: &str) {}
+
+    fn solve_p1(&self) -> anyhow::Result<super::Solution> {
         Ok(super::Solution::NotSolvedYet)
     }
 
-    fn solve_p2(&self, intput: &str) -> anyhow::Result<super::Solution> {
+    fn solve_p2(&self) -> anyhow::Result<super::Solution> {
         Ok(super::Solution::NotSolvedYet)
     }
 }

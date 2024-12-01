@@ -1,7 +1,12 @@
 use std::{fs::File, io::Read};
 
 use anyhow::{Context, Result};
+use constcat::concat;
 use serde_derive::Deserialize;
+
+pub const STORAGE_DIR: &str = "storage/";
+pub const PROMPTS_DIR: &str = concat!(STORAGE_DIR, "prompts");
+pub const INPUTS_DIR: &str = concat!(STORAGE_DIR, "inputs");
 
 #[derive(Deserialize)]
 pub struct Config {

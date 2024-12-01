@@ -1,11 +1,12 @@
 use std::{
+    fmt::Display,
     fs::OpenOptions,
     io::{Read, Write},
+    path::PathBuf,
     process::{Command, Stdio},
+    str::FromStr,
     sync::Arc,
 };
-
-use constcat::concat;
 
 use reqwest::{
     blocking::{Client, ClientBuilder},
@@ -15,17 +16,20 @@ use reqwest::{
 
 use anyhow::{bail, Context, Result};
 
-use crate::config::Config;
+use crate::config::{Config, INPUTS_DIR, PROMPTS_DIR};
 
 const URL: &str = "adventofcode.com";
 const START_OF_PUZZLE_PROMPT: &str = "::: {role=\"main\"}";
 const END_OF_PUZZLE_PROMPT: &str = "Both parts of this puzzle are complete";
-const STORAGE_DIR: &str = "storage/";
-const PROMPTS_DIR: &str = concat!(STORAGE_DIR, "prompts");
-const INPUTS_DIR: &str = concat!(STORAGE_DIR, "inputs");
 
 #[derive(Clone, Copy, Eq, PartialEq, Hash)]
 pub struct Day(u8);
+
+impl Display for Day {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
 
 impl Day {
     pub fn new(day: u8) -> Self {
@@ -34,6 +38,14 @@ impl Day {
         }
 
         Self(day)
+    }
+
+    pub fn prompt_path(&self) -> PathBuf {
+        PathBuf::from_str(&format!("{PROMPTS_DIR}/{:02}.md", self.0)).unwrap()
+    }
+
+    pub fn input_path(&self) -> PathBuf {
+        PathBuf::from_str(&format!("{INPUTS_DIR}/{:02}.txt", self.0)).unwrap()
     }
 }
 
