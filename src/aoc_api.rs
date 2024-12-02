@@ -19,7 +19,6 @@ use anyhow::{bail, Context, Result};
 use crate::config::{Config, INPUTS_DIR, PROMPTS_DIR, SAMPLES_DIR};
 
 const URL: &str = "adventofcode.com";
-const START_OF_PUZZLE_PROMPT: &str = "::: {role=\"main\"}";
 const END_OF_PUZZLE_PROMPT: &str = "Both parts of this puzzle are complete";
 
 #[derive(Clone, Copy, Eq, PartialEq, Hash)]
@@ -122,19 +121,10 @@ impl AOCClient {
 
         let lines = markdown.split('\n');
         let mut relevant_lines = Vec::new();
-        let mut relevant_section = false;
         for line in lines {
-            if line.contains(START_OF_PUZZLE_PROMPT) {
-                relevant_section = true;
-                continue;
-            }
-
+            relevant_lines.push(line);
             if line.contains(END_OF_PUZZLE_PROMPT) {
                 break;
-            }
-
-            if relevant_section {
-                relevant_lines.push(line);
             }
         }
 
